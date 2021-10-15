@@ -1,9 +1,58 @@
+<?php
+session_start();
+
+error_reporting(0);
+
+    include("connection.php");
+    include("functions.php");
+
+    $user_data = check_login($con, false);
+
+  //  if($_SERVER['REQUEST_METHOD'] == "POST") {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        
+        if(!empty($username) && !empty($password) && !is_numeric($username))
+        {
+            $query = "select * from users where username = '$username'" ;
+
+            $result = mysqli_query($con,$query);
+
+            if($result)
+            {
+            if($result && mysqli_num_rows($result) > 0)
+                {
+                $user_data = mysqli_fetch_assoc($result);
+                if($user_data['password'] == $password)
+                    {
+                    $_SESSION['user_id'] = $user_data['user_id'];
+                    header("Location: index.php");
+                    die;
+                    }
+                else {
+                    echo "<div style='width:100%; height:40px; display:flex; text-align: center; align-items:center; justify-content:center;font-family:arial; background-color:pink; position: fixed;'>Incorrect password !!!<div>";
+                }
+                }
+
+                else {echo "<div style='width:100%; height:40px; display:flex; text-align: center; align-items:center; justify-content:center;font-family:arial; background-color:pink; position: fixed;'>Incorect username !!!<div>";}
+            }
+            else {echo "were";}
+
+        }
+        
+        
+         //   echo "Please enter some valid information!";
+  
+
+?>
+
 <!doctype html>
                         <html>
                             <head>
                                 <meta charset='utf-8'>
                                 <meta name='viewport' content='width=device-width, initial-scale=1'>
-                                <title>Snippet - BBBootstrap</title>
+                                <title>Log in</title>
                                 <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet'>
                                 <link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' rel='stylesheet'>
                                 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
@@ -22,9 +71,9 @@
 .box {
     width: 500px;
     padding: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: fixed;
+    top: 10%;
+    left: 32%;
     background: #191919;
     ;
     text-align: center;
@@ -145,17 +194,25 @@ a.socialIcon:hover,
     color: #fff;
     transition: all 0.8s;
     transition: all 0.8s
-}</style>
+}
+input :not(.norms){
+    display:none;
+}
+
+</style>
                                 </head>
                                 <body oncontextmenu='return false' class='snippet-body'>
                                 <div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <form onsubmit="event.preventDefault()" class="box">
+                <form class="box" autocomplete="off" method="post">
+               
                     <h1>Login</h1>
-                    <p class="text-muted"> Please enter your login and password!</p> <input type="text" name="" placeholder="Username"> <input type="password" name="" placeholder="Password"> <a class="forgot text-muted" href="#">Forgot password?</a> <input type="submit" name="" value="Login" href="#">
+                    <p class="text-muted"> Please enter your login and password!</p> <input type="text" name="username" placeholder="Username"> <input type="password" name="password" placeholder="Password">
+                    <input type="submit" value="Login">
                     <div class="col-md-12">
+                    
                         <ul class="social-network social-circle">
                             <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li>
@@ -168,6 +225,11 @@ a.socialIcon:hover,
     </div>
 </div>
                                 <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
-                                <script type='text/javascript'></script>
+                                <script type='text/javascript'>
+                         function reset(){
+                             document.getElementById("form").reset()
+                         }
+                           
+                            </script>
                                 </body>
                             </html>

@@ -3,6 +3,30 @@ header {
     background-color: purple;
 }
 
+.recent {
+    position: relative;
+    top: 50%;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    color: purple;
+}
+
+.btn {
+    float: right;
+    border: 2px solid white;
+    height: 30px;
+    width: 100px;
+    margin: 20px;
+    background-color: purple;
+    color: white;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+
 .header {
     width: 100%;
     height: 500px;

@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+echo '
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Grayscale - Start Bootstrap Theme</title>
+        <title>TEDvirtualwallet Home</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -28,9 +32,9 @@
                 <div class="d-flex justify-content-center">
                     <div class="text-center">
                         <img class="img1 mx-auto my-0 animated fadeIn" src="assets/img/logo2.png"><br>
-                        <a class="btn btn-primary" href="login.html">LOG IN</a>
+                        <a class="btn btn-primary" href="login.php" >LOG IN</a>
                     </div>
                 </div>
             </div>
-        </header>
-       
+        </header>'
+       ?>
